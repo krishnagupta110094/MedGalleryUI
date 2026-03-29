@@ -66,6 +66,7 @@ export default function Navbar() {
                 console.error("Logout API failed", err);
               }
               dispatch(logout());
+              localStorage.removeItem("token");
               navigate("/");
             }}
             className="bg-[#2490EB] text-white px-3 py-1 rounded hover:bg-[#225082] transition-colors duration-200"
@@ -129,6 +130,7 @@ export default function Navbar() {
                 document.cookie = "token=; Max-Age=0; path=/;";
                 document.cookie = "refreshToken=; Max-Age=0; path=/;";
                 dispatch(logout());
+                localStorage.removeItem("token");
                 navigate("/");
                 setIsOpen(false);
               }}

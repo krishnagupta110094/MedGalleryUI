@@ -1,14 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import BASE_URL from "../api/axios";
-import { useSelector } from "react-redux";
+
 
 const UploadFiles = ({ categories, fetchFiles }) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState(categories[0]?._id || "");
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const UploadFiles = ({ categories, fetchFiles }) => {
       await axios.post(`${BASE_URL}/admin/files`, formData, {
         withCredentials: true,
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       alert("File uploaded successfully");

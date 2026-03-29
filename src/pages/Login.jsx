@@ -30,21 +30,12 @@ export default function Login() {
     dispatch(setError(null));
 
     try {
-      const { data } = await axios.post(
-        `${BASE_URL}/auth/login`,
-        form,
-        {
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-          },
-        }, // important for cookie auth
-      );
-      //   console.log(data);
+      const { data } = await axios.post(`${BASE_URL}/auth/login`, form);
 
       if (data.success) {
         dispatch(setUser(data.user)); // store user in Redux
         dispatch(setLoading(false));
+        localStorage.setItem("token", data.user.token);
         navigate("/dashboard"); // redirect after successful login
       } else {
         dispatch(setError(data.message || "Login failed"));

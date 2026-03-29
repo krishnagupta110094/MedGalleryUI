@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import BASE_URL from "../api/axios";
-import { useSelector } from "react-redux";
+
 
 const CreateCategory = ({ fetchCategories }) => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const { user } = useSelector((state) => state.auth);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ const CreateCategory = ({ fetchCategories }) => {
         {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         },
       );

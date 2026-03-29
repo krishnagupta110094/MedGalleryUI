@@ -25,7 +25,7 @@ const Dashboard = () => {
       const res = await axios.get(`${BASE_URL}/categories`, {
         withCredentials: true,
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       setCategories(res.data.categories || []);
@@ -41,7 +41,7 @@ const Dashboard = () => {
       const res = await axios.get(`${BASE_URL}/files/preview`, {
         withCredentials: true,
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
       setFiles(res.data.data || []);
@@ -66,9 +66,14 @@ const Dashboard = () => {
       await axios.post(
         `${BASE_URL}/auth/logout`,
         {},
-        { withCredentials: true },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
       );
       dispatch(logout());
+      localStorage.removeItem("token");
       navigate("/");
     } catch (err) {
       console.error("Logout failed", err);

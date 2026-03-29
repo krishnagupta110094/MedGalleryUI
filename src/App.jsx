@@ -14,7 +14,11 @@ const App = () => {
       try {
         const { data } = await axios.get(
           `${BASE_URL}/auth/me`,
-          { withCredentials: true }, // send cookie
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }, // send cookie
         );
 
         if (data.success && data.user) {
