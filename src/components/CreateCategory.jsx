@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import BASE_URL from "../api/axios";
+import { useSelector } from "react-redux";
 
 const CreateCategory = ({ fetchCategories }) => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +16,12 @@ const CreateCategory = ({ fetchCategories }) => {
       await axios.post(
         `${BASE_URL}/admin/categories`,
         { name },
-        { withCredentials: true },
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        },
       );
       alert("Category created successfully");
       setName("");

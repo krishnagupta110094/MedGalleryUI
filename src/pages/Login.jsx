@@ -33,7 +33,12 @@ export default function Login() {
       const { data } = await axios.post(
         `${BASE_URL}/auth/login`,
         form,
-        { withCredentials: true }, // important for cookie auth
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }, // important for cookie auth
       );
       //   console.log(data);
 

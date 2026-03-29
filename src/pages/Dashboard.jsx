@@ -24,6 +24,9 @@ const Dashboard = () => {
     try {
       const res = await axios.get(`${BASE_URL}/categories`, {
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       });
       setCategories(res.data.categories || []);
     } catch (err) {
@@ -37,6 +40,9 @@ const Dashboard = () => {
     try {
       const res = await axios.get(`${BASE_URL}/files/preview`, {
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       });
       setFiles(res.data.data || []);
     } catch (err) {

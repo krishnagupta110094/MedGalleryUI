@@ -12,13 +12,18 @@ import BASE_URL from "../api/axios";
 
 const AllFiles = () => {
   const dispatch = useDispatch();
-  const { filesData, loading, error } = useSelector((state) => state.files);
+  const { user, filesData, loading, error } = useSelector(
+    (state) => state.files,
+  );
 
   async function fetchFiles() {
     dispatch(setLoading(true));
     try {
       const res = await axios.get(`${BASE_URL}/admin/files`, {
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
       });
       dispatch(setFiles(res.data.files || []));
     } catch (err) {
