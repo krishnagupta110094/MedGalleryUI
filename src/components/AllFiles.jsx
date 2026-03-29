@@ -73,7 +73,7 @@ const AllFiles = () => {
           <h3 className="text-2xl font-semibold text-[#225082] mb-4">
             {category.category}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 ">
             {category.files.map((file) => (
               <div
                 key={file._id}

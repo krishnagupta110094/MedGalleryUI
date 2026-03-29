@@ -58,8 +58,6 @@ const Gallery = () => {
     setIsSidebarOpen(false); // Close sidebar on mobile after selection
   };
 
-
-
   return (
     <div className="min-h-screen bg-[#ffffff] pt-16">
       {/* Hamburger Menu for Mobile */}
@@ -145,19 +143,19 @@ const Gallery = () => {
           // ALL categories → show per category
           Object.keys(files).map((catName) => (
             <div key={catName} className="mb-8">
-              <h4 className="text-2xl font-bold text-[#225082] mb-4">
+              <h4 className="w-[300px] md:w-full lg:w-[400px] mt-6 bg-[#225082] text-white text-2xl font-bold px-4 py-3 rounded-xl shadow-sm">
                 {catName}
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {files[catName].map((file) => (
                   <div
                     key={file._id}
-                    className="bg-white p-3 md:p-4 rounded-2xl shadow hover:shadow-lg transition"
+                    className="bg-white p-3 md:p-4 rounded-2xl shadow hover:shadow-lg  transition mx-8 md:mx-0"
                   >
                     <img
                       src={file.fileUrl}
                       alt={file.title || "File"}
-                      className="w-full h-32 md:h-48 object-cover rounded-lg mb-3 md:mb-4 cursor-pointer"
+                      className="w-full h-48 object-cover rounded-lg mb-3 md:mb-4 cursor-pointer"
                       onClick={() => setSelectedImage(file)}
                     />
                     <h5 className="text-[#225082] font-semibold text-sm md:text-base">
@@ -219,8 +217,6 @@ const Gallery = () => {
             <h3 className="mt-3 font-semibold text-[#225082]">
               {selectedImage.title || "Unnamed File"}
             </h3>
-
-            
           </div>
         </div>
       )}
