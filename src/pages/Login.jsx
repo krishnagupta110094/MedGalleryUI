@@ -36,7 +36,7 @@ export default function Login() {
         {
           withCredentials: true,
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${user?.token}`,
           },
         }, // important for cookie auth
       );
