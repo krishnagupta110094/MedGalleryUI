@@ -1,5 +1,4 @@
 // components/AllFiles.js
-import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {
@@ -9,12 +8,11 @@ import {
   removeFileFromState,
 } from "../store/slices/fileSlice";
 import BASE_URL from "../api/axios";
+import { useEffect } from "react";
 
 const AllFiles = () => {
   const dispatch = useDispatch();
-  const { filesData, loading, error } = useSelector(
-    (state) => state.files,
-  );
+  const { filesData, loading, error } = useSelector((state) => state.files);
 
   async function fetchFiles() {
     dispatch(setLoading(true));
@@ -41,6 +39,9 @@ const AllFiles = () => {
     try {
       await axios.delete(`${BASE_URL}/admin/files/${fileId}`, {
         withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
     } catch (err) {
       console.error("Delete failed:", err);
