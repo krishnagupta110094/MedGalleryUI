@@ -30,7 +30,16 @@ export default function Login() {
     dispatch(setError(null));
 
     try {
-      const { data } = await axios.post(`${BASE_URL}/auth/login`, form);
+      const { data } = await axios.post(
+        `${BASE_URL}/auth/login`,
+        form,
+        {
+          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }, // important for cookie auth
+      );
       //   console.log(data);
 
       if (data.success) {
